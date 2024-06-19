@@ -7,11 +7,15 @@
         <environment id="dev">
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost/menudb"/>
-                <property name="username" value="ohgiraffers"/>
-                <property name="password" value="ohgiraffers"/>
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/> <!--mysql 드라이버-->
+                <property name="url" value="jdbc:mysql://localhost/menudb"/> <!--mysql 사용-->
+                <property name="username" value="ohgiraffers"/> <!--아이디-->
+                <property name="password" value="ohgiraffers"/> <!--비밀번호-->
             </dataSource>
         </environment>
     </environments>
+    <mappers>
+        <mapper resource="com/ohgiraffers/section01/xmlconfig/menu-mapper.xml"/>
+    </mappers>
+
 </configuration>
