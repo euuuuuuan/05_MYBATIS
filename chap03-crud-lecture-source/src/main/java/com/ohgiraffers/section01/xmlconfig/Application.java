@@ -40,8 +40,10 @@ public class Application {
                     menuController.registMenu(inputMenu());
                     break;
                 case 4:
+                    menuController.modifyMenu(inputModifyMenu());
                     break;
                 case 5:
+                    menuController.deleteMenu(inputMenuCode());
                     break;
                 default:
                     System.out.println("잘못된 메뉴를 선택하셨습니다.");
@@ -76,6 +78,28 @@ public class Application {
         parameter.put("name", name);
         parameter.put("price", price);
         parameter.put("categoryCode", categoryCode);
+        return parameter;
+    }
+
+    // 수정할 메뉴 정보를 입력하는 메소드
+    private static Map<String, String> inputModifyMenu() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("수정할 메뉴 코드를 입력하세요: ");
+        String code = sc.nextLine();
+        System.out.println("수정할 메뉴 이름을 입력하세요: ");
+        String name = sc.nextLine();
+        System.out.println("수정할 메뉴 가격을 입력하세요: ");
+        String price = sc.nextLine();
+        System.out.println("수정할 메뉴 카테고리 코드를 입력하세요: ");
+        String categoryCode = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("code", code);
+        parameter.put("name", name);
+        parameter.put("price", price);
+        parameter.put("categoryCode", categoryCode);
+
         return parameter;
     }
 }

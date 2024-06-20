@@ -17,13 +17,13 @@ public class PrintResult {
         String successMessage = "";
         switch (successCode) {
             case "insert":
-                successMessage = "신규 메뉴 등록을 실패했습니다.";
+                successMessage = "신규 메뉴 등록을 성공했습니다.";
                 break;
             case "update":
-                successMessage = "신규 메뉴 수정을 실패했습니다.";
+                successMessage = "신규 메뉴 수정을 성공했습니다.";
                 break;
             case "delete":
-                successMessage = "신규 메뉴 삭제를 실패했습니다.";
+                successMessage = "신규 메뉴 삭제를 성공했습니다.";
                 break;
         }
         System.out.println(successMessage);

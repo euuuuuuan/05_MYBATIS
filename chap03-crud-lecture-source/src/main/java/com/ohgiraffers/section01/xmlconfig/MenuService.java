@@ -58,7 +58,7 @@ public class MenuService {
         int result = menuDAO.insertMenu(sqlSession, menu);
 
         // result 결과값에 따라서 insert, update, delete는 트랜젝션 처리를 해줘야함.
-        if(result > 0) {
+        if (result > 0) {
             sqlSession.commit();
         } else {
             sqlSession.rollback();
@@ -67,4 +67,32 @@ public class MenuService {
         return result > 0 ? true : false;
     }
 
+    public boolean modifyMenu(MenuDTO menu) {
+        SqlSession sqlSession = getSqlSession();
+        int result = menuDAO.updateMenu(sqlSession, menu);
+
+        if (result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+        return result > 0 ? true : false;
+
+
+    }
+
+    public boolean deleteMenu(int code) {
+        SqlSession sqlSession = getSqlSession();
+
+        int result = menuDAO.deleteMenu(sqlSession, code);
+
+        if (result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+        return result > 0 ? true : false;
+    }
 }
