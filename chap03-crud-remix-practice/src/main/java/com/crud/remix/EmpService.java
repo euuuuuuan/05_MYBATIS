@@ -30,4 +30,13 @@ public class EmpService {
 
         return emp;
     }
+
+    public EmpDTO selectEmpByName(String name) {
+        SqlSession sqlSession = getSqlSession();
+        empMapper = sqlSession.getMapper(EmpMapper.class);
+        EmpDTO emp = empMapper.selectEmpByName(name);
+        sqlSession.close();
+
+        return emp;
+    }
 }

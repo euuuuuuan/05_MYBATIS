@@ -28,6 +28,9 @@ public class Application {
                 case 2:
                     empController.selectEmpByCode(inputEmpCode());
                     break;
+                case 3:
+                    empController.selectEmpByName(inputEmpName());
+                    break;
                 default:
                     System.out.println("잘못된 번호를 선택했습니다.");
                     break;
@@ -35,6 +38,19 @@ public class Application {
         } while (true);
     }
 
+    private static Map<String, String> inputEmpName() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("직원 이름을 입력하세요: ");
+        String name = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("name", name);
+
+        return parameter;
+    }
+
+    /* 제네릭(generic) 타입을 사용하여 타입을 지정하는 부분.
+     Map<String, String>은 키와 값이 모두 String 타입인 맵을 의미*/
     private static Map<String, String> inputEmpCode() {
         Scanner sc = new Scanner(System.in);
         System.out.println("직원 코드를 입력하세요: ");

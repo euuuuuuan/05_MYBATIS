@@ -27,11 +27,16 @@
         where ent_yn = 'n'
         order by emp_id
     </select>
-
+<!--_int는 파라미터의 타입을 나타내는 것으로, 이 경우 Java의 원시 타입인 int를 의미-->
     <select id="selectEmpByCode" parameterType="_int" resultMap="empResultMap">
         select *
         from employee
         where emp_id = #{ code }
     </select>
 
+    <select id="selectEmpByName" resultMap="empResultMap">
+        select *
+        from employee
+        where ent_name = #{ name }
+    </select>
 </mapper>

@@ -36,4 +36,16 @@ public class EmpController {
             printResult.printErrorMessage("selectOne");
         }
     }
+
+    public void selectEmpByName(Map<String, String> parameter) {
+        String name = parameter.get("name");
+
+        EmpDTO emp = empService.selectEmpByName(name);
+
+        if (emp != null) {
+            printResult.printEmp(emp);
+        } else {
+            printResult.printErrorMessage("selectName");
+        }
+    }
 }
