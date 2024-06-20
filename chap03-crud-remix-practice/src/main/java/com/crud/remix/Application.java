@@ -19,6 +19,7 @@ public class Application {
             System.out.println("6. 직원 정보 삭제");
             System.out.print("선택할 번호를 입력해주세요: ");
             int no = sc.nextInt();
+            sc.nextLine();
 
             switch (no) {
                 case 1:
@@ -26,6 +27,7 @@ public class Application {
                     break;
                 case 2:
                     empController.selectEmpByCode(inputEmpCode());
+                    break;
                 default:
                     System.out.println("잘못된 번호를 선택했습니다.");
                     break;
