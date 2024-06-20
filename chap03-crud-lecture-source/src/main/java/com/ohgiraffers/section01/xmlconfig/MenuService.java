@@ -9,16 +9,16 @@ import static com.ohgiraffers.section01.xmlconfig.Template.getSqlSession;
 public class MenuService {
 
     /*
-    * Service 란?
-    *
-    * 비즈니스 로직을 수행하는 클래스라고도 함.
-    * 주로 DAO가 DB에서 받아온 데이터를 전달받아 가공해 Controller로 return 해준다.
-    *
-    * Mybatis 에서 Service의 역할
-    * 1. SqlSession 생성 및 닫기
-    * 2. DAO(데이터베이스 접근 객체)의 메소드 호출
-    * 3. 트랜젝션(commit, rollback) 제어
-    * */
+     * Service 란?
+     *
+     * 비즈니스 로직을 수행하는 클래스라고도 함.
+     * 주로 DAO가 DB에서 받아온 데이터를 전달받아 가공해 Controller로 return 해준다.
+     *
+     * Mybatis 에서 Service의 역할
+     * 1. SqlSession 생성 및 닫기
+     * 2. DAO(데이터베이스 접근 객체)의 메소드 호출
+     * 3. 트랜젝션(commit, rollback) 제어
+     * */
 
     private final MenuDAO menuDAO;
 
@@ -52,4 +52,19 @@ public class MenuService {
 
         return menu;
     }
+
+    public boolean registMenu(MenuDTO menu) {
+        SqlSession sqlSession = getSqlSession();
+        int result = menuDAO.insertMenu(sqlSession, menu);
+
+        // result 결과값에 따라서 insert, update, delete는 트랜젝션 처리를 해줘야함.
+        if(result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+        return result > 0 ? true : false;
+    }
+
 }
