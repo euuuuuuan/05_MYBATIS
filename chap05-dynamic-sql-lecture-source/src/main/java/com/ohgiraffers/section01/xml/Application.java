@@ -19,10 +19,18 @@ public class Application {
             int no = sc.nextInt();
 
             switch (no) {
-                case 1: ifSubMenu(); break;
-                case 2: chooseSubMenu(); break;
-                case 3: forEachSubName(); break;
-                case 4: trimSubMenu(); break;
+                case 1:
+                    ifSubMenu();
+                    break;
+                case 2:
+                    chooseSubMenu();
+                    break;
+                case 3:
+                    forEachSubName();
+                    break;
+                case 4:
+                    trimSubMenu();
+                    break;
                 case 9:
                     System.out.println("프로그램을 종료합니다.");
                     return;
@@ -45,13 +53,13 @@ public class Application {
 
             switch (no) {
                 case 1:
-                    menuService.searchMenuByCodeOrSearchAll(inputAllorOne());
+                    menuService.searchMenuByCodeOrSearchAll(inputAllOrOne());
                     break;
                 case 2:
-//                    menuService.
+                    menuService.searchMenuByNameOrCategory(inputSearchCriteriaMap());
                     break;
                 case 3:
-//                    menuService.
+                    menuService.modifyMenu(inputChangeInfo());
                     break;
                 case 9:
                     return;
@@ -59,7 +67,59 @@ public class Application {
         } while (true);
     }
 
-    private static SearchCriteria inputAllorOne() {
+    private static Map<String, Object> inputChangeInfo() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("변경할 메뉴 코드를 입력하세요: ");
+        int code = sc.nextInt();
+        System.out.println("변경할 메뉴 이름을 입력하세요: ");
+        sc.nextLine();
+        String name = sc.nextLine();
+        System.out.println("변경할 카테고리 코드를 입력하세요: ");
+        int categoryCode = sc.nextInt();
+        System.out.println("판매 여부를 결정해주세요(Y/N): ");
+        sc.nextLine();
+        String orderableStatus = sc.nextLine();
+
+        Map<String, Object> criteria = new HashMap<>();
+        criteria.put("code", code);
+        criteria.put("name", name);
+        criteria.put("categoryCode", categoryCode);
+        criteria.put("orderableStatus", orderableStatus);
+
+        return criteria;
+    }
+
+    private static Map<String, Object> inputSearchCriteriaMap() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("검색할 조건을 입력하세요(category or name or both or null: ");
+        String condition = sc.nextLine();
+
+        Map<String, Object> criteria = new HashMap<>();
+
+        if ("category".equals(condition)) {
+            System.out.println("검색할 카테고리 코드를 입력하세요: ");
+            int categoryValue = sc.nextInt();
+
+            criteria.put("categoryValue", categoryValue);
+        } else if ("name".equals(condition)) {
+            System.out.println("검색할 이름을 입력하세요: ");
+            String nameValue = sc.nextLine();
+
+            criteria.put("nameValue", nameValue);
+        } else if ("both".equals(condition)) {
+            System.out.println("검색할 이름을 입력하세요: ");
+            String nameValue = sc.nextLine();
+            System.out.println("검색할 카테고리 코드를 입력하세요: ");
+            String categoryValue = sc.nextLine();
+
+            criteria.put("nameValue", nameValue);
+            criteria.put("categoryValue", categoryValue);
+
+        }
+        return criteria;
+    }
+
+    private static SearchCriteria inputAllOrOne() {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("검색조건을 입력하시겠습니다?(예 or 아니오): ");
@@ -99,7 +159,7 @@ public class Application {
         Set<Integer> set = new HashSet<>();
         while (set.size() < 5) {
             // 1 ~ 21 까지 랜덤 수 temp
-            int temp = ((int)(Math.random() * 23)) + 1;
+            int temp = ((int) (Math.random() * 23)) + 1;
             set.add(temp);
         }
         List<Integer> list = new ArrayList<>(set);

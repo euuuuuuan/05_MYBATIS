@@ -52,11 +52,17 @@ public class EmpController {
     public void registEmp(Map<String, String> parameter) {
         String empId = parameter.get("empId");
         String name = parameter.get("name");
+        String empNo = parameter.get("empNo");
+        String jobCode = parameter.get("jobCode");
+        String salLevel = parameter.get("salLevel");
         int salary = Integer.parseInt(parameter.get("salary"));
 
         EmpDTO emp = new EmpDTO();
         emp.setEmpId(empId);
         emp.setEmpName(name);
+        emp.setEmpNo(empNo);
+        emp.setJobCode(jobCode);
+        emp.setSalLevel(salLevel);
         emp.setSalary(salary);
 
         if (empService.registEmp(emp)) {

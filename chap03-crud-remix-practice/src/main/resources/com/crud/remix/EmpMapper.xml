@@ -46,14 +46,15 @@
         emp_name,
         emp_no,
         job_code,
-        sal_level
+        sal_level,
         salary
-        ) value (
+        ) values (
         #{ empId },
         #{ empName },
         #{ empNo },
         #{ jobCode },
-        #{ salLevel }
+        #{ salLevel },
+        #{ salary }
         )
     </insert>
 

@@ -72,10 +72,10 @@ public class MenuService {
     public void searchMenuByRandomMenuCode(List<Integer> randomMenuCodeList) {
         SqlSession sqlSession = getSqlSession();
         mapper = sqlSession.getMapper(DynamicSqlMapper.class);
-
+        System.out.println(randomMenuCodeList);
         Map<String, List<Integer>> criteria = new HashMap<>();
 
-        criteria.put("randoMenuCodeList", randomMenuCodeList);
+        criteria.put("randomMenuCodeList", randomMenuCodeList);
 
         List<MenuDTO> menuList = mapper.searchMenuByRandomMenuCode(criteria);
 
@@ -91,6 +91,7 @@ public class MenuService {
 
     public void searchMenuByCodeOrSearchAll(SearchCriteria searchCriteria) {
         SqlSession sqlSession = getSqlSession();
+        System.out.println(searchCriteria);
         mapper = sqlSession.getMapper(DynamicSqlMapper.class);
 
         List<MenuDTO> menuList = mapper.searchMenuByCodeOrSearchAll(searchCriteria);
@@ -103,5 +104,38 @@ public class MenuService {
             System.out.println("검색 결과가 존재하지 않습니다.");
         }
         sqlSession.close();
+    }
+
+    public void searchMenuByNameOrCategory(Map<String, Object> criteria) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(DynamicSqlMapper.class);
+
+        List<MenuDTO> menuList = mapper.searchMenuByNameOrCategory(criteria);
+
+        if (menuList != null && menuList.size() > 0) {
+            for (MenuDTO menu : menuList) {
+                System.out.println(menu);
+            }
+        } else {
+            System.out.println("검색 결과가 존재하지 않습니다.");
+        }
+        sqlSession.close();
+    }
+
+    public void modifyMenu(Map<String, Object> criteria) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(DynamicSqlMapper.class);
+
+        int result = mapper.modifyMenu(criteria);
+
+        if (result > 0) {
+            System.out.println("메뉴 정보 변경에 성공했습니다.");
+            sqlSession.commit();
+        } else {
+            System.out.println("메뉴 정보 변경에 실패했습니다.");
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+
     }
 }
