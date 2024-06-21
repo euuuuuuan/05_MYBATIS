@@ -40,7 +40,7 @@
         where emp_name = #{ name }
     </select>
 
-    <insert id="registEmp" parameterType="java.util.List">
+    <insert id="registEmp" parameterType="com.crud.remix.EmpDTO">
         insert into employee (
         emp_id,
         emp_name,
