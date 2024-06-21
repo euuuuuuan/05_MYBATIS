@@ -39,4 +39,20 @@ public class EmpService {
 
         return emp;
     }
+
+    public boolean registEmp(EmpDTO emp) {
+        SqlSession sqlSession = getSqlSession();
+        empMapper = sqlSession.getMapper(EmpMapper.class);
+        int result = empMapper.registEmp(emp);
+
+        if (result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+        return result > 0 ? true : false;
+
+    }
 }

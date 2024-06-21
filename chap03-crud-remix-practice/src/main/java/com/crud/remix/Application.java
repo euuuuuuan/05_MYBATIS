@@ -31,11 +31,29 @@ public class Application {
                 case 3:
                     empController.selectEmpByName(inputEmpName());
                     break;
+                case 4:
+                    empController.registEmp(inputEmpInfo());
                 default:
                     System.out.println("잘못된 번호를 선택했습니다.");
                     break;
             }
         } while (true);
+    }
+
+    private static Map<String, String> inputEmpInfo() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("직원 번호를 입력하세요.");
+        String empId = sc.nextLine();
+        System.out.println("직원 이름를 입력하세요.");
+        String name = sc.nextLine();
+        System.out.println("직원 급여를 입력하세요.");
+        String salary = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("empId", empId);
+        parameter.put("name", name);
+        parameter.put("salary", salary);
+        return parameter;
     }
 
     private static Map<String, String> inputEmpName() {

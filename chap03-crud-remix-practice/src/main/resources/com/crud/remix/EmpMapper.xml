@@ -37,6 +37,18 @@
     <select id="selectEmpByName" resultMap="empResultMap">
         select *
         from employee
-        where ent_name = #{ name }
+        where emp_name = #{ name }
     </select>
+
+    <insert id="registEmp" parameterType="java.util.List">
+        insert into employee (
+        emp_id,
+        emp_name,
+        salary
+        ) value (
+        #{ empId },
+        #{ empName },
+        #{ salary }
+        )
+    </insert>
 </mapper>

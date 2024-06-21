@@ -9,4 +9,6 @@ public interface EmpMapper {
     EmpDTO selectEmpByCode(int code);
 
     EmpDTO selectEmpByName(String name);
+
+    int registEmp(EmpDTO emp);
 }

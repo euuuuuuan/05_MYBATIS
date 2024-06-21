@@ -24,4 +24,19 @@ public class PrintResult {
     }
 
 
+    public void printSuccessMessage(String successCode) {
+        String successMessage = "";
+        switch (successCode) {
+            case "insert":
+                successMessage = "신규 직원 등록을 성공했습니다.";
+                break;
+            case "update":
+                successMessage = "직원 정보 수정을 성공했습니다.";
+                break;
+            case "delete":
+                successMessage = "직원 정보 삭제를 성공했습니다.";
+                break;
+        }
+        System.out.println(successMessage);
+    }
 }

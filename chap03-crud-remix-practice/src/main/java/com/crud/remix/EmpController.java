@@ -43,9 +43,26 @@ public class EmpController {
         EmpDTO emp = empService.selectEmpByName(name);
 
         if (emp != null) {
-            printResult.printEmp(emp);
+            printResult.printEmp(emp); // 이것은 왜 석섹스가 아닌것인가
         } else {
             printResult.printErrorMessage("selectName");
+        }
+    }
+
+    public void registEmp(Map<String, String> parameter) {
+        String empId = parameter.get("empId");
+        String name = parameter.get("name");
+        int salary = Integer.parseInt(parameter.get("salary"));
+
+        EmpDTO emp = new EmpDTO();
+        emp.setEmpId(empId);
+        emp.setEmpName(name);
+        emp.setSalary(salary);
+
+        if (empService.registEmp(emp)) {
+            printResult.printSuccessMessage("insert");
+        } else {
+            printResult.printErrorMessage("insert");
         }
     }
 }
