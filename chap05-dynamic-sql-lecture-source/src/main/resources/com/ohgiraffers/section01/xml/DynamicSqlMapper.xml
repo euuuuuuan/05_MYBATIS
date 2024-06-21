@@ -219,7 +219,7 @@
 <!--            <if test="categoryCode != null and categoryCode gt 0">-->
 <!--                category_code = #{ categoryCode },-->
 <!--            </if>-->
-<!--            <if test="orderableStatus != null and categoryCode != ''">-->
+<!--            <if test="orderableStatus != null and orderableStatus != ''">-->
 <!--                orderable_status = #{ orderableStatus }-->
 <!--            </if>-->
 <!--        </set>-->
