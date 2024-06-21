@@ -65,4 +65,31 @@ public class EmpController {
             printResult.printErrorMessage("insert");
         }
     }
+
+    public void modifyEmp(Map<String, String> parameter) {
+        String empId = parameter.get("empId");
+        String name = parameter.get("name");
+        int salary = Integer.parseInt(parameter.get("salary"));
+
+        EmpDTO emp = new EmpDTO();
+        emp.setEmpId(empId);
+        emp.setEmpName(name);
+        emp.setSalary(salary);
+
+        if (empService.modifyEmp(emp)) {
+            printResult.printSuccessMessage("update");
+        } else {
+            printResult.printErrorMessage("update");
+        }
+    }
+
+    public void deleteEmp(Map<String, String> parameter) {
+        int code = Integer.parseInt(parameter.get("code"));
+
+        if (empService.deleteEmp(code)) {
+            printResult.printSuccessMessage("delete");
+        } else {
+            printResult.printErrorMessage("delete");
+        }
+    }
 }

@@ -59,7 +59,7 @@ public class Application {
             int temp = ((int) (Math.random() * 23)) + 1;
             set.add(temp);
         }
-        
+
     }
 
     private static void chooseSubMenu() {

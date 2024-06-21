@@ -11,4 +11,8 @@ public interface EmpMapper {
     EmpDTO selectEmpByName(String name);
 
     int registEmp(EmpDTO emp);
+
+    int modifyEmp(EmpDTO emp);
+
+    int deleteEmp(int code);
 }

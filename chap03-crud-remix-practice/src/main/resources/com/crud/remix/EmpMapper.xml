@@ -24,7 +24,7 @@
     <select id="selectAllEmp" resultMap="empResultMap">
         select *
         from employee
-        where ent_yn = 'n'
+        where emp_id
         order by emp_id
     </select>
 <!--_int는 파라미터의 타입을 나타내는 것으로, 이 경우 Java의 원시 타입인 int를 의미-->
@@ -51,4 +51,19 @@
         #{ salary }
         )
     </insert>
+
+    <update id="modifyEmp" parameterType="com.crud.remix.EmpDTO">
+        update employee
+        set
+<!--        emp_id = #{ empId },-->
+        emp_name = #{ empName },
+        salary = #{ salary }
+        where emp_id = #{ empId }
+    </update>
+
+    <delete id="deleteEmp" parameterType="_int">
+        delete
+        from employee
+        where emp_id = #{ empId }
+    </delete>
 </mapper>

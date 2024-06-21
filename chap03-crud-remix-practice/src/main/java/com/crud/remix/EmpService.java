@@ -55,4 +55,34 @@ public class EmpService {
         return result > 0 ? true : false;
 
     }
+
+    public boolean modifyEmp(EmpDTO emp) {
+        SqlSession sqlSession = getSqlSession();
+        empMapper = sqlSession.getMapper(EmpMapper.class);
+        int result = empMapper.modifyEmp(emp);
+
+        if (result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+        return result > 0 ? true : false;
+    }
+
+    public boolean deleteEmp(int code) {
+        SqlSession sqlSession = getSqlSession();
+
+        empMapper = sqlSession.getMapper(EmpMapper.class);
+        int result = empMapper.deleteEmp(code);
+
+        if (result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+        return result > 0 ? true : false;
+    }
 }

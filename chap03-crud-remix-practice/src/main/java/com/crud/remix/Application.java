@@ -33,6 +33,13 @@ public class Application {
                     break;
                 case 4:
                     empController.registEmp(inputEmpInfo());
+                    break;
+                case 5:
+                    empController.modifyEmp(inputModifyEmp());
+                    break;
+                case 6:
+                    empController.deleteEmp(inputEmpCode());
+                    break;
                 default:
                     System.out.println("잘못된 번호를 선택했습니다.");
                     break;
@@ -40,13 +47,30 @@ public class Application {
         } while (true);
     }
 
+    private static Map<String, String> inputModifyEmp() {
+        Scanner sc = new Scanner(System.in);
+
+        String empId = sc.nextLine();
+        System.out.println("수정할 직원 번호를 입력하세요.");
+        String name = sc.nextLine();
+        System.out.println("수정할 직원 이름를 입력하세요.");
+        String salary = sc.nextLine();
+        System.out.println("수정할 직원 급여를 입력하세요.");
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("empId", empId);
+        parameter.put("name", name);
+        parameter.put("salary", salary);
+        return parameter;
+    }
+
     private static Map<String, String> inputEmpInfo() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("직원 번호를 입력하세요.");
+        System.out.println("추가할 직원 번호를 입력하세요.");
         String empId = sc.nextLine();
-        System.out.println("직원 이름를 입력하세요.");
+        System.out.println("추가할 직원 이름를 입력하세요.");
         String name = sc.nextLine();
-        System.out.println("직원 급여를 입력하세요.");
+        System.out.println("추가할 직원 급여를 입력하세요.");
         String salary = sc.nextLine();
 
         Map<String, String> parameter = new HashMap<>();
