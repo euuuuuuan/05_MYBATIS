@@ -2,7 +2,10 @@ package com.ohgiraffers.section01.xml;
 
 import com.ohgiraffers.common.SearchCriteria;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Application {
     public static void main(String[] args) {
@@ -20,14 +23,72 @@ public class Application {
 
             switch (no) {
                 case 1: ifSubMenu(); break;
-                case 2: break;
-                case 3: break;
+                case 2: chooseSubMenu(); break;
+                case 3: forEachSubName(); break;
                 case 4: break;
                 case 9:
                     System.out.println("프로그램을 종료합니다.");
                     return;
             }
         } while (true);
+    }
+
+    private static void forEachSubName() {
+        Scanner sc = new Scanner(System.in);
+        MenuService menuService = new MenuService();
+        do {
+            System.out.println("=========== forEach 서브메뉴 ===========");
+            System.out.println("1. 랜덤한 메뉴 5개 추출해서 조회하기");
+            System.out.println("9. 이전 메뉴로");
+            System.out.println("메뉴 번호를 입력하세요");
+            int no = sc.nextInt();
+
+            switch (no) {
+                case 1:
+                    menuService.searchMenuByRandomMenuCode(createRandomMenuCodeList());
+                    break;
+                case 9:
+                    return;
+            }
+        } while (true);
+    }
+
+    private static List<Integer> createRandomMenuCodeList() {
+        Set<Integer> set = new HashSet<>();
+        while (set.size() < 5) {
+            int temp = ((int) (Math.random() * 23)) + 1;
+            set.add(temp);
+        }
+        
+    }
+
+    private static void chooseSubMenu() {
+
+        Scanner sc = new Scanner(System.in);
+        MenuService menuService = new MenuService();
+        do {
+            System.out.println("=========== choose 서브메뉴 ===========");
+            System.out.println("1. 카테고리 상위 분류별 메뉴 보여주기(식사, 음료, 디저트)");
+            System.out.println("9. 이전 메뉴로");
+            System.out.println("메뉴 번호를 입력하세요");
+            int no = sc.nextInt();
+
+            switch (no) {
+                case 1:
+                    menuService.searchMenuBySubCategory(inputSubCategory());
+                    break;
+                case 9:
+                    return;
+            }
+        } while (true);
+    }
+
+    private static SearchCriteria inputSubCategory() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("상위 분류를 입력해주세요.(식사, 음료, 디저트)");
+        String value = sc.nextLine();
+
+        return new SearchCriteria("category", value);
     }
 
     private static void ifSubMenu() {

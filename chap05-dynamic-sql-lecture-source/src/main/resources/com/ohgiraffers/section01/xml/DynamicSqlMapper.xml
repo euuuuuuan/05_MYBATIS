@@ -11,12 +11,12 @@
         <result property="categoryCode" column="category_code"/>
         <result property="orderableStatus" column="orderable_status"/>
     </resultMap>
-<!-- 다이나믹 쿼리에서 사용하는 비교 연산자
-     gte (greater than or equal to) : >=
-     gt (greater than) : >
-     lte (less than or equal to) : <=
-     lt (less than) : <
-     -->
+    <!-- 다이나믹 쿼리에서 사용하는 비교 연산자
+         gte (greater than or equal to) : >=
+         gt (greater than) : >
+         lte (less than or equal to) : <=
+         lt (less than) : <
+         -->
 
     <!-- <![CDATA[문장]] : 문장에 해당하는 공간에서는 부등호에 대한 표현이 자유로움 -->
     <!-- <if> 태그 : test 속성의 조건에 해당할 때만 엘리먼트 구문을 쿼리에 포함한다. -->
@@ -68,6 +68,43 @@
         <if test="condition == 'category'">
             and b.category_name = #{ value }
         </if>
+        order by a.menu_code
+    </select>
+
+    <!-- <choose>(when, otherwise) 태그는 Java switch-case문 같은 역할을 한다. -->
+    <!-- 사용하는 방법
+        <choose>
+            <when test = "조건">
+                쿼리문
+            </when>
+            ...
+            <otherwise>
+                쿼리구문
+            </otherwise>
+        </choose>
+        <when> 태그 test 속성 조건에 부합하면 <when> 엘리먼트 구문을 쿼리에 포함한다.
+        어떠한 when 조건도 만족하지 못하면 <otherwise> 엘리먼트 구문을 쿼리에 포함한다.
+     -->
+    <select id="searchMenuBySubCategory" parameterType="SearchCriteria" resultMap="menuResultMap">
+        select
+        a.menu_code,
+        a.menu_name,
+        a.menu_price,
+        a.category_code,
+        a.orderable_status
+        from tbl_menu a
+        where a.orderable_status = 'Y'
+        <choose>
+            <when test="value == '식사'">
+                and a.category_code in (1, 4, 5, 6, 7)
+            </when>
+            <when test="value == '음료'">
+                and a.category_code in (2, 8, 9, 10)
+            </when>
+            <otherwise> <!-- 디저트 -->
+                and a.category_code in (3, 11, 12)
+            </otherwise>
+        </choose>
         order by a.menu_code
     </select>
 </mapper>
