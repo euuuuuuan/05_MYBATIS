@@ -44,11 +44,16 @@
         insert into employee (
         emp_id,
         emp_name,
+        emp_no,
+        job_code,
+        sal_level
         salary
         ) value (
         #{ empId },
         #{ empName },
-        #{ salary }
+        #{ empNo },
+        #{ jobCode },
+        #{ salLevel }
         )
     </insert>
 

@@ -107,4 +107,53 @@
         </choose>
         order by a.menu_code
     </select>
+
+    <!-- <foreach> 태그 : Java의 for문 역할을 한다.
+                    1. collection 속성 : 반복을 수행할 대상
+                    2. item 속성 : 반복을 수행할 때마다 꺼내올 값의 이름 설정
+                    3. open 속성 : <foreach> 엘리먼트 구문의 가장 앞에 올 문자
+                    4. separator 속성 : 반복이 수행될 때 꺼내온 item 사이에 들어갈 문자
+                    5. close 속성 : <foreach> 엘리먼트 구문의 마지막에 올 문자
+     -->
+    <select id="searchMenuByRandomMenuCode" parameterType="hashmap" resultMap="menuResultMap">
+        select
+        a.menu_code,
+        a.menu_name,
+        a.menu_price,
+        a.category_code,
+        a.orderable_status
+        from tbl_menu a
+        where a.orderable_status = 'Y'
+        and a.menu_code in
+        <foreach collection="randomMenuCodeList" item="menuCode" open="(" separator=", " close=")">
+        <!-- parameter 객체로 받아오지 않고, static 필드 또는 static 메소드에 직접 접근하여 반환받아 사용 가능
+            - static 필드 접근시 collection 속성 : @풀클래스명@필드명
+            - static 메소드 접근시 collection 속성 : @풀클래스명@메소드명()
+            -->
+<!--        <foreach collection="@com.ohgiraffers.section01.xml.Application@createRandomMenuCodeList()"-->
+<!--                 item="menuCode" open="(" separator=", " close=")">-->
+            #{ menuCode }
+        </foreach>
+    </select>
+<!-- <where> 태그 : 엘리먼트 구문이 where로 시작하지 않으면 자동으로 where를 붙여준다.
+                    또한 where 엘리먼트 내부에 모두 쿼리문이 추가되지 않는 상황인 경우
+                    where를 무시한다. 단, name 부분에 where를 빼주지 않으면 where where로
+                    where가 2개 생성될 수 있다.
+                    엘리먼트 구문이 AND나 OR로 시작하면 자동으로 해당 단어를 지워준다.-->
+    <select id="searchMenuByCodeOrSearchAll" parameterType="SearchCriteria" resultMap="menuResultMap">
+        select
+        a.menu_code,
+        a.menu_name,
+        a.menu_price,
+        a.category_code,
+        a.orderable_status
+        from tbl_menu a
+        <!-- eq : equal to
+             ne : not equal to -->
+        <if test="condition != null and condition eq 'menuCode'">
+            <where>
+                a.menu_code = #{ value }
+            </where>
+        </if>
+    </select>
 </mapper>
