@@ -74,7 +74,7 @@ public class ElementTestService {
         List<MenuAndCategoryDTO> menuList = mapper.selectResultMapAssociationTest();
 
         for (MenuAndCategoryDTO menu : menuList) {
-            System.out.println("메뉴 이름: " + menu.getName() + ", 카테고리 이름: " + menu.getCategory().getName());
+            System.out.println(menu);
         }
 
         sqlSession.close();

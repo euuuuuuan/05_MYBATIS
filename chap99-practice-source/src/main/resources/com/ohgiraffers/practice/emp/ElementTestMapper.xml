@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.practice.emp.ElementTestMapper">
+
+    <resultMap id="empAndDepartmentResultMap" type="com.ohgiraffers.common.EmpAndDepartmentDTO">
+        <id property="empName" column="emp_name"/>
+        <result property="deptTitle" column="dept_code"/>
+        <association property="empList" javaType="com.ohgiraffers.common.EmpDTO">
+            <id property="deptTitle" column="dept_title"/>
+            <result property="deptId" column="dept_id"/>
+        </association>
+    </resultMap>
+
+    <select id="associationTest" resultMap="empAndDepartmentResultMap">
+        select
+        a.emp_name,
+        a.dept_code,
+        b.dept_title,
+        b.dept_id
+        from employee a
+        join department b on (a.dept_code = b.dept_id)
+    </select>
+</mapper>
