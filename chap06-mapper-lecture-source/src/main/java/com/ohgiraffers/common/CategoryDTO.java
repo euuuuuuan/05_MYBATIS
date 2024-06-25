@@ -7,8 +7,8 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-
 public class CategoryDTO {
+
     private int code;
     private String name;
     private int refCategoryCode;

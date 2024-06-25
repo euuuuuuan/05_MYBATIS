@@ -9,8 +9,8 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-
 public class CategoryAndMenuDTO {
+
     private int code;
     private String name;
     private int refCategoryCode;
